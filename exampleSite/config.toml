@@ -1,0 +1,34 @@
+# Base URL used when generating links to your pages
+# Set to the URL for your site
+baseURL = "example.com"
+
+# The name of this wonderful theme ;-).
+theme = 'hugo-digital-gardenscape-theme'
+
+# Basic metadata configuration for your blog.
+title = "Hugo Digital Gardenscape Demo Site"
+author = "John"
+languageCode = "en"
+
+# Generate a nice robots.txt for SEO
+enableRobotsTXT = true
+
+[params]
+  # The "description" of your website. This is used in the meta data of your generated html.
+  description = "Demo Site for Hugo Digital Gardenscape Theme"
+
+  favicon = "favicon.png"
+
+  # Another "title" :-). This one is used as the site_name on the Hugo's internal
+  # opengraph structured data template.
+  # See https://ogp.me/ and https://gohugo.io/templates/internal#open-graph.
+  title = "Hugo Digital Gardenscape Demo Site"
+
+[markup]
+  [markup.tableOfContents]
+    startLevel = 1
+    endLevel = 6
+    ordered = false
+
+[taxonomies]
+  tag = 'tags'

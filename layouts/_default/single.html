@@ -1,0 +1,82 @@
+{{ define "main" }}
+<h1 id="page-title">{{ .Title }}</h1>
+<details>
+  <summary id="toc">Table of Contents</summary>
+  {{ .Page.TableOfContents }}
+  <ul>
+    <ul>
+      <li><a href="#tags">Tags</a></li>
+      <li><a href="#backlinks">Backlinks</a></li>
+      <li><a href="#forwardlinks">Forwardlinks</a></li>
+    </ul>
+  </ul>
+</details>
+
+<hr>
+
+<content>
+  {{ .Content }}
+</content>
+
+<hr>
+
+<h2 id="tags">Tags</h2>
+<p>
+  {{ range (.GetTerms "tags") }}
+  <a href="{{ .Permalink }}">#{{ .LinkTitle }}</a>
+  {{ end }}
+</p>
+{{ $parentPage := . }}
+{{ $currRellink := substr .RelPermalink 0 -1 }}
+{{ $currContent := .Content }}
+{{ $backlinks := slice }}
+{{ $forwardlinks := slice }}
+{{ range (where .Site.Pages ".Params.ignore" "!=" "true") }}
+  {{ $found := findRE $currRellink .Content 1 }}
+  {{ if $found }}
+    {{ $backlinks = $backlinks | append . }}
+  {{ end }}
+{{ end }}
+{{ range (where .Site.Pages ".Params.ignore" "!=" "true") }}
+  {{ $found := findRE $currRellink .Content 1 }}
+  {{ $rellink := substr .RelPermalink 0 -1 }}
+  {{ $found = findRE $rellink $currContent 1 }}
+  {{ if $found }}
+    {{ $forwardlinks = $forwardlinks | append . }}
+    {{ end }}
+{{ end }}
+
+<h2 id="backlinks">Backlinks</h2>
+<ul>
+{{ range $backlinks }}
+  <li>
+    <a href="{{ .Permalink }}">{{ .Title }}</a>
+  </li>
+    {{ else }}
+  <li>
+    No backlinks (yet)
+  </li>
+    {{ end }}
+</ul>
+<h2 id="forwardlinks">Forwardlinks</h2>
+<ul>
+{{ $forwardlinkswithoutbaseurl := slice }}
+{{ $baseurl := printf "%s" .Site.BaseURL }}
+{{ range $forwardlinks }}
+  {{ $permalink := printf "%s" .Permalink }}
+  {{ if eq $permalink $baseurl }}
+  {{ else }}
+    {{ $forwardlinkswithoutbaseurl = $forwardlinkswithoutbaseurl | append . }}
+  {{ end }}
+{{ end }}
+{{ range $forwardlinkswithoutbaseurl }}
+    <li>
+      <a href="{{ .Permalink }}">{{ .Title }}</a>
+    </li>
+{{ else }}
+  <li>
+    No forwardlinks (yet)
+  </li>
+  {{ end }}
+</ul>
+{{ end }}
