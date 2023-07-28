@@ -8,6 +8,7 @@ This Theme is Based of: [hugo-bearblog by janraasch](https://github.com/janraasc
 
 - Fix for backlinks and forwardlinks containing pages that aren't actually referenced
   - e.g. Git on [this page](https://sionnach.xyz/cryptography/)
+  - maybe try removing part of code in single.html that remove the "/" from links
 - Fix backlinks and forwardlinks containing current page you are on
   - e.g. Ansible being in forwardlinks and backlinks of [this page](https://sionnach.xyz/ansible/) (despite the ansible page not being linked in the ansible page)
 
