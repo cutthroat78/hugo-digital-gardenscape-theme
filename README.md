@@ -4,6 +4,13 @@ Another Hugo Theme for Digital Gardens
 
 This Theme is Based of: [hugo-bearblog by janraasch](https://github.com/janraasch/hugo-bearblog)
 
+## To Do
+
+- Fix for backlinks and forwardlinks containing pages that aren't actually referenced
+  - e.g. Git on [this page](https://sionnach.xyz/cryptography/)
+- Fix backlinks and forwardlinks containing current page you are on
+  - e.g. Ansible being in forwardlinks and backlinks of [this page](https://sionnach.xyz/ansible/) (despite the ansible page not being linked in the ansible page)
+
 ## Links Used To Help Make This Theme
 
 - [GitHub: hugo-bearblog by janraasch](https://github.com/janraasch/hugo-bearblog)
